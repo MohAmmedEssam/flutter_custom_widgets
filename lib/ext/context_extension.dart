@@ -20,7 +20,7 @@ extension ContextExtension on BuildContext {
       EdgeInsets.symmetric(horizontal: hSpace * 0.5, vertical: vSpace * 0.5);
 
   // colors
-  Color get primaryColor => Theme.of(this).primaryColor;
+  Color get primaryColor => colorScheme.primary;
   ColorScheme get colorScheme => Theme.of(this).colorScheme;
 
   // languageCode
