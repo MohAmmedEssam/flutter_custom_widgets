@@ -9,6 +9,7 @@ class CustomText extends StatelessWidget {
   final Alignment? alignment;
   final TextAlign? textAlign;
   final Color? color;
+  final int? maxLines;
 
   const CustomText({
     super.key,
@@ -18,6 +19,7 @@ class CustomText extends StatelessWidget {
     this.textAlign,
     this.color,
     this.customValue,
+    this.maxLines,
   });
 
   @override
@@ -28,6 +30,7 @@ class CustomText extends StatelessWidget {
           text.tr.replaceAll('%@', customValue?.tr ?? ''),
           style: context.font(fontSize).copyWith(color: color),
           textAlign: textAlign,
+          maxLines: maxLines,
         ));
   }
 }
