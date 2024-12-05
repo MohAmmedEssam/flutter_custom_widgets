@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 enum HeaderStyle { h1, h2, h3, h4, h5, h6 }
 
@@ -24,11 +25,14 @@ extension ContextExtension on BuildContext {
   ColorScheme get colorScheme => Theme.of(this).colorScheme;
 
   // languageCode
-  String get languageCode => Localizations.localeOf(this).languageCode;
+  String get languageCode =>
+      Get.locale?.languageCode ?? Localizations.localeOf(this).languageCode;
 
   // Alignment
   Alignment get preferredAlignment =>
       languageCode == 'ar' ? Alignment.centerRight : Alignment.centerLeft;
+  TextAlign get preferredTextAlign =>
+      languageCode == 'ar' ? TextAlign.right : TextAlign.left;
 
   // animation
   Duration get animationDuration => const Duration(milliseconds: 200);

@@ -7,6 +7,7 @@ class CustomText extends StatelessWidget {
   final String? customValue;
   final HeaderStyle fontSize;
   final Alignment? alignment;
+  final TextAlign? textAlign;
   final Color? color;
 
   const CustomText({
@@ -14,6 +15,7 @@ class CustomText extends StatelessWidget {
     this.text = '',
     this.fontSize = HeaderStyle.h3,
     this.alignment,
+    this.textAlign,
     this.color,
     this.customValue,
   });
@@ -25,6 +27,7 @@ class CustomText extends StatelessWidget {
         child: Text(
           text.tr.replaceAll('%@', customValue?.tr ?? ''),
           style: context.font(fontSize).copyWith(color: color),
+          textAlign: textAlign,
         ));
   }
 }
