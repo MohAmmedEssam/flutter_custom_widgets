@@ -73,6 +73,9 @@ extension ContextExtension on BuildContext {
         fontWeight = FontWeight.normal;
     }
 
-    return TextStyle(fontSize: fontSize, fontWeight: fontWeight);
+    return TextStyle(
+        fontSize: fontSize,
+        fontWeight: fontWeight,
+        fontFamily: 'fontFamily'.tr);
   }
 }
