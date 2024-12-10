@@ -3,10 +3,10 @@ import '../ext/context_extension.dart';
 
 class HorizontalList extends StatelessWidget {
   final List<Widget> children;
-  const HorizontalList({
-    super.key,
-    required this.children,
-  });
+  final CrossAxisAlignment? crossAxisAlignment;
+
+  const HorizontalList(
+      {super.key, required this.children, this.crossAxisAlignment});
   @override
   Widget build(BuildContext context) {
     List<Widget> modifiedChildren = [];
@@ -21,7 +21,7 @@ class HorizontalList extends StatelessWidget {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
-        // crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: crossAxisAlignment ?? CrossAxisAlignment.start,
         children: modifiedChildren,
       ),
     );
