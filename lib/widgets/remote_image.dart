@@ -4,13 +4,18 @@ class ImageFromUrl extends StatelessWidget {
   final String? imageUrl;
   final double width;
   final double height;
+  final double? radius;
+  final BorderRadius? borderRadius;
+  final BoxFit? fit;
 
-  const ImageFromUrl({
-    super.key,
-    this.imageUrl,
-    this.width = double.infinity,
-    this.height = double.infinity,
-  });
+  const ImageFromUrl(
+      {super.key,
+      this.imageUrl,
+      this.width = double.infinity,
+      this.height = double.infinity,
+      this.radius,
+      this.borderRadius,
+      this.fit});
 
   @override
   Widget build(BuildContext context) {
@@ -31,31 +36,35 @@ class ImageFromUrl extends StatelessWidget {
       );
     }
 
-    return Image.network(
-      imageUrl!,
-      width: width,
-      height: height,
-      loadingBuilder: (BuildContext context, Widget child,
-          ImageChunkEvent? loadingProgress) {
-        if (loadingProgress == null) {
-          return child; // Display the image when loading is complete
-        } else {
+    return ClipRRect(
+      borderRadius: borderRadius ?? BorderRadius.circular(radius ?? 0),
+      child: Image.network(
+        imageUrl!,
+        width: width,
+        height: height,
+        fit: fit,
+        loadingBuilder: (BuildContext context, Widget child,
+            ImageChunkEvent? loadingProgress) {
+          if (loadingProgress == null) {
+            return child; // Display the image when loading is complete
+          } else {
+            return SizedBox(
+              width: width,
+              height: height,
+              child:
+                  defaultPlaceholder, // Display placeholder while the image is loading
+            );
+          }
+        },
+        errorBuilder:
+            (BuildContext context, Object error, StackTrace? stackTrace) {
           return SizedBox(
             width: width,
             height: height,
-            child:
-                defaultPlaceholder, // Display placeholder while the image is loading
+            child: defaultPlaceholder, // Display placeholder while error
           );
-        }
-      },
-      errorBuilder:
-          (BuildContext context, Object error, StackTrace? stackTrace) {
-        return SizedBox(
-          width: width,
-          height: height,
-          child: defaultPlaceholder, // Display placeholder while error
-        );
-      },
+        },
+      ),
     );
   }
 }
