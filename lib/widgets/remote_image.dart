@@ -21,10 +21,14 @@ class ImageFromUrl extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget defaultPlaceholder = ColorFiltered(
       colorFilter: const ColorFilter.mode(Color(0xFFD8D8D8), BlendMode.srcIn),
-      child: Image.asset(
-        "assets/images/logo.png",
-        height: height,
-        width: width,
+      child: ClipRRect(
+        borderRadius: borderRadius ?? BorderRadius.circular(radius ?? 0),
+        child: Image.asset(
+          "assets/images/logo.png",
+          height: height,
+          width: width,
+          fit: fit,
+        ),
       ),
     );
 
