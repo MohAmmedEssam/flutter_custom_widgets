@@ -27,9 +27,9 @@ class OneRowPerColumn extends StatelessWidget {
       }
 
       // Add space if needed
-      if (withSepartor && i < (children.length - 1)) {
-        modifiedChildren.add(SizedBox(height: context.vSpace));
-      }
+      // if (withSepartor && i < (children.length - 1)) {
+      modifiedChildren.add(SizedBox(height: context.vSpace));
+      // }
     }
 
     return Column(
