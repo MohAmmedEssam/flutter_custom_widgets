@@ -15,17 +15,21 @@ class OneRowPerColumn extends StatelessWidget {
 
     for (int i = 0; i < children.length; i++) {
       modifiedChildren.add(children[i]);
+
+      // Add separator if needed
       if (withSepartor && i < (children.length - 1)) {
         modifiedChildren.add(SizedBox(height: context.vSpace * 0.5));
-      }
-      // Add separator if needed
-      if (withSepartor && i < children.length - 1) {
+
         modifiedChildren.add(Container(
           color: Colors.grey,
           height: 0.5,
         ));
       }
-      modifiedChildren.add(SizedBox(height: context.vSpace));
+
+      // Add space if needed
+      if (withSepartor && i < (children.length - 1)) {
+        modifiedChildren.add(SizedBox(height: context.vSpace));
+      }
     }
 
     return Column(
