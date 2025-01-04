@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'loader.dart';
 
 class ImageFromUrl extends StatelessWidget {
   final String? imageUrl;
@@ -37,15 +38,18 @@ class ImageFromUrl extends StatelessWidget {
         width: width,
         height: height,
         fit: fit,
-        loadingBuilder: (BuildContext context, Widget child,
-            ImageChunkEvent? loadingProgress) {
+        loadingBuilder: (
+          BuildContext context,
+          Widget child,
+          ImageChunkEvent? loadingProgress,
+        ) {
           if (loadingProgress == null) {
             return child; // Display the image when loading is complete
           } else {
             return SizedBox(
               width: width,
               height: height,
-              child: placeholder ?? defaultPlaceholder(),
+              child: const Loader(),
             );
           }
         },
