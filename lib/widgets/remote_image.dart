@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ImageFromUrl extends StatelessWidget {
   final String? imageUrl;
@@ -24,7 +25,7 @@ class ImageFromUrl extends StatelessWidget {
       child: ClipRRect(
         borderRadius: borderRadius ?? BorderRadius.circular(radius ?? 0),
         child: Image.asset(
-          "assets/images/logo.png",
+          "assets/images/logo.png".tr,
           height: height,
           width: width,
           fit: fit,

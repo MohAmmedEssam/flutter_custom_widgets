@@ -71,8 +71,9 @@ extension ContextExtension on BuildContext {
     }
 
     return TextStyle(
-        fontSize: fontSize,
-        fontWeight: fontWeight,
-        fontFamily: 'fontFamily'.tr);
+      fontSize: fontSize,
+      fontWeight: fontWeight,
+      fontFamily: 'fontFamily'.tr,
+    );
   }
 }
