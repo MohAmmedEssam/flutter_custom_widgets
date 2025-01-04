@@ -68,9 +68,6 @@ extension ContextExtension on BuildContext {
         fontSize = screenWidth * 0.025;
         fontWeight = FontWeight.normal;
         break;
-      default:
-        fontSize = screenWidth * 0.035;
-        fontWeight = FontWeight.normal;
     }
 
     return TextStyle(

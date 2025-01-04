@@ -24,6 +24,9 @@ class CustomButton extends StatelessWidget {
     if (style == CustomButtonStyle.main) {
       return ElevatedButton(
         onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: context.primaryColor,
+        ),
         child: Padding(
           padding: context.sfullPadding,
           child: CustomText(
@@ -37,6 +40,9 @@ class CustomButton extends StatelessWidget {
     } else {
       return OutlinedButton(
         onPressed: onPressed,
+        style: OutlinedButton.styleFrom(
+          side: BorderSide(color: context.primaryColor),
+        ),
         child: Padding(
           padding: context.sfullPadding,
           child: CustomText(
