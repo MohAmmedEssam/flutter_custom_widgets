@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'loader.dart';
 
@@ -31,35 +32,54 @@ class ImageFromUrl extends StatelessWidget {
       );
     }
 
+    // return ClipRRect(
+    //   borderRadius: borderRadius ?? BorderRadius.circular(radius ?? 0),
+    //   child: Image.network(
+    //     imageUrl!,
+    //     width: width,
+    //     height: height,
+    //     fit: fit,
+    //     loadingBuilder: (
+    //       BuildContext context,
+    //       Widget child,
+    //       ImageChunkEvent? loadingProgress,
+    //     ) {
+    //       if (loadingProgress == null) {
+    //         return child; // Display the image when loading is complete
+    //       } else {
+    //         return SizedBox(
+    //           width: width,
+    //           height: height,
+    //           child: const Loader(),
+    //         );
+    //       }
+    //     },
+    //     errorBuilder:
+    //         (BuildContext context, Object error, StackTrace? stackTrace) {
+    //       return SizedBox(
+    //           width: width,
+    //           height: height,
+    //           child: placeholder ?? defaultPlaceholder());
+    //     },
+    //   ),
+    // );
     return ClipRRect(
       borderRadius: borderRadius ?? BorderRadius.circular(radius ?? 0),
-      child: Image.network(
-        imageUrl!,
+      child: CachedNetworkImage(
+        imageUrl: imageUrl!,
         width: width,
         height: height,
         fit: fit,
-        loadingBuilder: (
-          BuildContext context,
-          Widget child,
-          ImageChunkEvent? loadingProgress,
-        ) {
-          if (loadingProgress == null) {
-            return child; // Display the image when loading is complete
-          } else {
-            return SizedBox(
-              width: width,
-              height: height,
-              child: const Loader(),
-            );
-          }
-        },
-        errorBuilder:
-            (BuildContext context, Object error, StackTrace? stackTrace) {
-          return SizedBox(
-              width: width,
-              height: height,
-              child: placeholder ?? defaultPlaceholder());
-        },
+        placeholder: (_, __) => SizedBox(
+          width: width,
+          height: height,
+          child: placeholder ?? const Loader(),
+        ),
+        errorWidget: (_, __, ___) => SizedBox(
+          width: width,
+          height: height,
+          child: placeholder ?? defaultPlaceholder(),
+        ),
       ),
     );
   }
