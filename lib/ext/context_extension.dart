@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
+import 'dart:math';
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
 
 enum HeaderStyle { h1, h2, h3, h4, h5, h6 }
 
@@ -7,6 +8,7 @@ extension ContextExtension on BuildContext {
   // full scale
   double get fullWidth => MediaQuery.of(this).size.width;
   double get fullHeight => MediaQuery.of(this).size.height;
+  double get maxWidthNeeded => min(fullWidth, 500);
 
   // spaces
   double get hSpace => fullWidth * 0.03;
@@ -39,7 +41,7 @@ extension ContextExtension on BuildContext {
 
   // Text
   TextStyle font(HeaderStyle style) {
-    double screenWidth = MediaQuery.of(this).size.width;
+    double screenWidth = maxWidthNeeded;
     double fontSize;
     FontWeight fontWeight;
 
