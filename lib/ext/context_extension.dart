@@ -9,6 +9,7 @@ extension ContextExtension on BuildContext {
   double get fullWidth => MediaQuery.of(this).size.width;
   double get fullHeight => MediaQuery.of(this).size.height;
   double get maxWidthNeeded => min(fullWidth, 500);
+  bool get isMobileLayout => maxWidthNeeded < fullWidth;
 
   // spaces
   double get hSpace => fullWidth * 0.03;

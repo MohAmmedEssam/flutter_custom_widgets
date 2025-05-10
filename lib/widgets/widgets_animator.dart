@@ -30,7 +30,7 @@ class WidgetsAnimator extends StatelessWidget {
             return Center(
                 child: Image.asset(
               "assets/images/nodata.png",
-              width: context.fullWidth * 0.5,
+              width: context.maxWidthNeeded * 0.5,
             ));
           case WidgetStatus.isOk:
             return widget;
