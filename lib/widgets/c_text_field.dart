@@ -10,6 +10,7 @@ class CustomTextField extends StatefulWidget {
   final VoidCallback? onEditingComplete;
   final String? initialValue;
   final Icon? prefixIcon, suffixIcon;
+  final TextInputType? keyboardType;
 
   const CustomTextField({
     super.key,
@@ -21,6 +22,7 @@ class CustomTextField extends StatefulWidget {
     this.initialValue,
     this.prefixIcon,
     this.suffixIcon,
+    this.keyboardType,
   });
 
   @override
@@ -28,19 +30,19 @@ class CustomTextField extends StatefulWidget {
 }
 
 class CustomTextFieldState extends State<CustomTextField> {
-  late bool _isObscured; // Declare _isObscured as late
+  late bool _isObscured;
 
   @override
   void initState() {
     super.initState();
-    _isObscured = widget
-        .isSecured; // Initialize _isObscured with the value from isSecured
+    _isObscured = widget.isSecured;
   }
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       initialValue: widget.initialValue,
+      keyboardType: widget.keyboardType,
       onSaved: widget.onSave,
       validator: widget.validator,
       onEditingComplete: widget.onEditingComplete,
@@ -67,9 +69,9 @@ class CustomTextFieldState extends State<CustomTextField> {
                     ),
                   )
                 : null),
-        floatingLabelStyle: MaterialStateTextStyle.resolveWith(
-          (Set<MaterialState> states) {
-            final Color color = states.contains(MaterialState.error)
+        floatingLabelStyle: WidgetStateTextStyle.resolveWith(
+          (Set<WidgetState> states) {
+            final Color color = states.contains(WidgetState.error)
                 ? context.theme.colorScheme.error
                 : context.primaryColor;
             return TextStyle(color: color, letterSpacing: 1.3);
