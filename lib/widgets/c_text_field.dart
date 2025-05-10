@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../ext/context_extension.dart';
 
 class CustomTextField extends StatefulWidget {
   final bool isSecured;
@@ -10,6 +9,9 @@ class CustomTextField extends StatefulWidget {
   final VoidCallback? onEditingComplete;
   final String? initialValue;
   final Icon? prefixIcon, suffixIcon;
+  final Color? backgroundColor;
+  final Color? placeholderColor;
+  final TextInputType? keyboardType;
 
   const CustomTextField({
     super.key,
@@ -21,6 +23,9 @@ class CustomTextField extends StatefulWidget {
     this.initialValue,
     this.prefixIcon,
     this.suffixIcon,
+    this.backgroundColor,
+    this.placeholderColor,
+    this.keyboardType,
   });
 
   @override
@@ -28,30 +33,58 @@ class CustomTextField extends StatefulWidget {
 }
 
 class CustomTextFieldState extends State<CustomTextField> {
-  late bool _isObscured; // Declare _isObscured as late
+  late bool _isObscured;
 
   @override
   void initState() {
     super.initState();
-    _isObscured = widget
-        .isSecured; // Initialize _isObscured with the value from isSecured
+    _isObscured = widget.isSecured;
   }
 
   @override
   Widget build(BuildContext context) {
+    final theme = context.theme;
+    final defaultBackground =
+        widget.backgroundColor ?? theme.colorScheme.surface;
+    final defaultPlaceholder = widget.placeholderColor ?? Colors.grey;
+
     return TextFormField(
       initialValue: widget.initialValue,
+      keyboardType: widget.keyboardType,
       onSaved: widget.onSave,
       validator: widget.validator,
       onEditingComplete: widget.onEditingComplete,
       obscureText: _isObscured,
       autovalidateMode: AutovalidateMode.onUserInteraction,
+      style: TextStyle(color: theme.colorScheme.onSurface),
       decoration: InputDecoration(
-        border: const OutlineInputBorder(),
+        filled: true,
+        fillColor: defaultBackground,
+        border: OutlineInputBorder(
+          borderSide: BorderSide(color: theme.colorScheme.outline),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide:
+              BorderSide(color: theme.colorScheme.outline.withOpacity(0.5)),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: theme.colorScheme.primary, width: 1.5),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: theme.colorScheme.error),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: theme.colorScheme.error, width: 1.5),
+          borderRadius: BorderRadius.circular(8),
+        ),
         labelText: widget.hint.tr,
         hintText: "${'Enter'.tr} ${widget.hint.tr}",
-        hintStyle: const TextStyle(color: Colors.grey),
-        fillColor: context.theme.colorScheme.background,
+        hintStyle: TextStyle(color: defaultPlaceholder),
+        labelStyle: TextStyle(color: defaultPlaceholder),
         prefixIcon: widget.prefixIcon,
         suffixIcon: (widget.suffixIcon) ??
             (widget.isSecured
@@ -63,18 +96,19 @@ class CustomTextFieldState extends State<CustomTextField> {
                     },
                     child: Icon(
                       _isObscured ? Icons.visibility_off : Icons.visibility,
-                      color: Colors.grey,
+                      color: defaultPlaceholder,
                     ),
                   )
                 : null),
-        floatingLabelStyle: MaterialStateTextStyle.resolveWith(
-          (Set<MaterialState> states) {
-            final Color color = states.contains(MaterialState.error)
-                ? context.theme.colorScheme.error
-                : context.primaryColor;
+        floatingLabelStyle: WidgetStateTextStyle.resolveWith(
+          (Set<WidgetState> states) {
+            final Color color = states.contains(WidgetState.error)
+                ? theme.colorScheme.error
+                : theme.colorScheme.primary;
             return TextStyle(color: color, letterSpacing: 1.3);
           },
         ),
+        errorStyle: TextStyle(color: theme.colorScheme.error),
       ),
     );
   }
