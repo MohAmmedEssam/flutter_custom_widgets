@@ -27,7 +27,7 @@ class Alert extends StatelessWidget {
   Widget build(BuildContext context) {
     return Wrap(children: [
       ShadowContainer(
-        color: context.colorScheme.background,
+        color: context.colorScheme.surface,
         borderRadius:
             BorderRadius.vertical(top: Radius.circular(context.hSpace * 2)),
         child: Padding(
