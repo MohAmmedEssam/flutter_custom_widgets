@@ -49,13 +49,36 @@ class CustomTextFieldState extends State<CustomTextField> {
       obscureText: _isObscured,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: InputDecoration(
-        border: const OutlineInputBorder(),
+        filled: true, // ✅ Enable background color
+        fillColor: context.colorScheme.surface, // ✅ Field background
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: Colors.grey.shade300, width: 1),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: Colors.grey.shade300, width: 1),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: context.colorScheme.primary, width: 2),
+        ),
+        floatingLabelBehavior: FloatingLabelBehavior.auto,
+        floatingLabelStyle: WidgetStateTextStyle.resolveWith((
+          Set<WidgetState> states,
+        ) {
+          final Color color = states.contains(WidgetState.error)
+              ? context.theme.colorScheme.error
+              : context.theme.colorScheme.secondary;
+          return context.font(HeaderStyle.h3).copyWith(
+                color: color,
+              );
+        }),
         labelText: widget.hint.tr,
         hintText: "${'Enter'.tr} ${widget.hint.tr}",
         hintStyle: const TextStyle(color: Colors.grey),
-        fillColor: context.theme.colorScheme.background,
         prefixIcon: widget.prefixIcon,
-        suffixIcon: (widget.suffixIcon) ??
+        suffixIcon: widget.suffixIcon ??
             (widget.isSecured
                 ? GestureDetector(
                     onTap: () {
@@ -69,14 +92,6 @@ class CustomTextFieldState extends State<CustomTextField> {
                     ),
                   )
                 : null),
-        floatingLabelStyle: WidgetStateTextStyle.resolveWith(
-          (Set<WidgetState> states) {
-            final Color color = states.contains(WidgetState.error)
-                ? context.theme.colorScheme.error
-                : context.primaryColor;
-            return TextStyle(color: color, letterSpacing: 1.3);
-          },
-        ),
       ),
     );
   }
