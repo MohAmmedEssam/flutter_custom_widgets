@@ -48,9 +48,10 @@ class CustomTextFieldState extends State<CustomTextField> {
       onEditingComplete: widget.onEditingComplete,
       obscureText: _isObscured,
       autovalidateMode: AutovalidateMode.onUserInteraction,
+      style: context.font(HeaderStyle.h4),
       decoration: InputDecoration(
         filled: true, // ✅ Enable background color
-        fillColor: context.colorScheme.surface, // ✅ Field background
+        fillColor: context.theme.colorScheme.surface, // ✅ Field background
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide(color: Colors.grey.shade300, width: 1),
@@ -61,8 +62,15 @@ class CustomTextFieldState extends State<CustomTextField> {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: context.colorScheme.primary, width: 2),
+          borderSide: BorderSide(
+            color: context.theme.colorScheme.primary,
+            width: 2,
+          ),
         ),
+        labelText: widget.hint.tr,
+        labelStyle: context.font(HeaderStyle.h4).copyWith(color: Colors.grey),
+        errorStyle: context.font(HeaderStyle.h5),
+
         floatingLabelBehavior: FloatingLabelBehavior.auto,
         floatingLabelStyle: WidgetStateTextStyle.resolveWith((
           Set<WidgetState> states,
@@ -70,13 +78,8 @@ class CustomTextFieldState extends State<CustomTextField> {
           final Color color = states.contains(WidgetState.error)
               ? context.theme.colorScheme.error
               : context.theme.colorScheme.secondary;
-          return context.font(HeaderStyle.h3).copyWith(
-                color: color,
-              );
+          return context.font(HeaderStyle.h3).copyWith(color: color);
         }),
-        labelText: widget.hint.tr,
-        hintText: "${'Enter'.tr} ${widget.hint.tr}",
-        hintStyle: const TextStyle(color: Colors.grey),
         prefixIcon: widget.prefixIcon,
         suffixIcon: widget.suffixIcon ??
             (widget.isSecured
