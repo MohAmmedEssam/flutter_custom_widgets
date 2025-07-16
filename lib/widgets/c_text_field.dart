@@ -6,6 +6,7 @@ class CustomTextField extends StatefulWidget {
   final bool isSecured;
   final String hint;
   final Function(String?) onSave;
+  final Function(String?)? onChanged;
   final String? Function(String?)? validator;
   final VoidCallback? onEditingComplete;
   final String? initialValue;
@@ -17,6 +18,7 @@ class CustomTextField extends StatefulWidget {
     required this.hint,
     required this.onSave,
     this.validator,
+    this.onChanged,
     this.onEditingComplete,
     this.isSecured = false,
     this.initialValue,
@@ -44,6 +46,7 @@ class CustomTextFieldState extends State<CustomTextField> {
       initialValue: widget.initialValue,
       keyboardType: widget.keyboardType,
       onSaved: widget.onSave,
+      onChanged: widget.onChanged,
       validator: widget.validator,
       onEditingComplete: widget.onEditingComplete,
       obscureText: _isObscured,
