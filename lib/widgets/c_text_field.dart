@@ -12,6 +12,7 @@ class CustomTextField extends StatefulWidget {
   final String? initialValue;
   final Icon? prefixIcon, suffixIcon;
   final TextInputType? keyboardType;
+  final FocusNode? focusNode; // 👈 add this
 
   const CustomTextField({
     super.key,
@@ -25,6 +26,7 @@ class CustomTextField extends StatefulWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.keyboardType,
+    this.focusNode, // 👈 add this
   });
 
   @override
@@ -44,6 +46,7 @@ class CustomTextFieldState extends State<CustomTextField> {
   Widget build(BuildContext context) {
     return TextFormField(
       initialValue: widget.initialValue,
+      focusNode: widget.focusNode, // 👈 use it here
       keyboardType: widget.keyboardType,
       onSaved: widget.onSave,
       onChanged: widget.onChanged,

@@ -5,11 +5,16 @@ class CustomSearchBar extends StatefulWidget {
   final String hint;
   final Function(String?) onSave;
   final Function(String?)? onChanged;
+  final Icon? prefixIcon, suffixIcon;
+  final bool autoFocus; // 👈 new parameter
 
   const CustomSearchBar({
     super.key,
     required this.hint,
     required this.onSave,
+    this.prefixIcon,
+    this.suffixIcon,
+    this.autoFocus = false, // 👈 default is false
     this.onChanged,
   });
 
@@ -19,6 +24,23 @@ class CustomSearchBar extends StatefulWidget {
 
 class CustomSearchBarState extends State<CustomSearchBar> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final FocusNode _focusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.autoFocus) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _focusNode.requestFocus();
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +48,10 @@ class CustomSearchBarState extends State<CustomSearchBar> {
       key: formKey,
       child: CustomTextField(
           hint: widget.hint,
+          focusNode: _focusNode, // 👈 pass focus node
           onChanged: widget.onChanged,
+          prefixIcon: widget.prefixIcon,
+          suffixIcon: widget.suffixIcon,
           onEditingComplete: () {
             formKey.currentState?.save();
           },
