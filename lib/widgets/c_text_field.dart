@@ -7,6 +7,7 @@ class CustomTextField extends StatefulWidget {
   final String hint;
   final Function(String?) onSave;
   final Function(String?)? onChanged;
+  final Function(String?)? onFieldSubmitted;
   final String? Function(String?)? validator;
   final VoidCallback? onEditingComplete;
   final String? initialValue;
@@ -20,6 +21,7 @@ class CustomTextField extends StatefulWidget {
     required this.onSave,
     this.validator,
     this.onChanged,
+    this.onFieldSubmitted,
     this.onEditingComplete,
     this.isSecured = false,
     this.initialValue,
@@ -52,6 +54,7 @@ class CustomTextFieldState extends State<CustomTextField> {
       onChanged: widget.onChanged,
       validator: widget.validator,
       onEditingComplete: widget.onEditingComplete,
+      onFieldSubmitted: widget.onFieldSubmitted,
       obscureText: _isObscured,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       style: context.font(HeaderStyle.h4),

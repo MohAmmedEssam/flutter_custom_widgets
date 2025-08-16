@@ -5,6 +5,7 @@ class CustomSearchBar extends StatefulWidget {
   final String hint;
   final Function(String?) onSave;
   final Function(String?)? onChanged;
+  final Function(String?)? onFieldSubmitted;
   final Icon? prefixIcon, suffixIcon;
   final bool autoFocus; // 👈 new parameter
 
@@ -12,6 +13,7 @@ class CustomSearchBar extends StatefulWidget {
     super.key,
     required this.hint,
     required this.onSave,
+    this.onFieldSubmitted,
     this.prefixIcon,
     this.suffixIcon,
     this.autoFocus = false, // 👈 default is false
@@ -50,6 +52,7 @@ class CustomSearchBarState extends State<CustomSearchBar> {
           hint: widget.hint,
           focusNode: _focusNode, // 👈 pass focus node
           onChanged: widget.onChanged,
+          onFieldSubmitted: widget.onFieldSubmitted,
           prefixIcon: widget.prefixIcon,
           suffixIcon: widget.suffixIcon,
           onEditingComplete: () {
