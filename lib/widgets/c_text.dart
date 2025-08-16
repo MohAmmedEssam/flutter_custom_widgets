@@ -10,6 +10,8 @@ class CustomText extends StatelessWidget {
   final TextAlign? textAlign;
   final Color? color;
   final int? maxLines;
+  final TextStyle? style;
+  final TextDecoration? decoration;
 
   const CustomText({
     super.key,
@@ -20,15 +22,23 @@ class CustomText extends StatelessWidget {
     this.color,
     this.customValue,
     this.maxLines,
+    this.style,
+    this.decoration,
   });
 
   @override
   Widget build(BuildContext context) {
+    // Base style from HeaderStyle
+    var baseStyle = context.font(fontSize).copyWith(color: color);
+    if (decoration != null) {
+      baseStyle = baseStyle.copyWith(decoration: decoration);
+    }
+
     return Container(
         alignment: alignment ?? context.preferredAlignment,
         child: Text(
           text.tr.replaceAll('%@', customValue?.tr ?? ''),
-          style: context.font(fontSize).copyWith(color: color),
+          style: style ?? baseStyle,
           textAlign: textAlign,
           maxLines: maxLines,
         ));
