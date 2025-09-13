@@ -40,7 +40,12 @@ class CustomPicker extends StatelessWidget {
               SizedBox(height: context.vSpace),
             ]),
           (data.length > 7)
-              ? Scroller(child: _buildPickerList(context))
+              ? SizedBox(
+                  height: context.fullHeight * 0.5, // or any height you want
+                  child: Scroller(
+                    child: _buildPickerList(context),
+                  ),
+                )
               : _buildPickerList(context)
         ]),
       ),
