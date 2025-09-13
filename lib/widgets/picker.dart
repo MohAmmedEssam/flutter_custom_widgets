@@ -40,12 +40,7 @@ class CustomPicker extends StatelessWidget {
               SizedBox(height: context.vSpace),
             ]),
           (data.length > 7)
-              ? SizedBox(
-                  height: context.fullHeight * 0.4, // or any height you want
-                  child: Scroller(
-                    child: _buildPickerList(context),
-                  ),
-                )
+              ? _buildPickerScrollingList(context)
               : _buildPickerList(context)
         ]),
       ),
@@ -73,6 +68,36 @@ class CustomPicker extends StatelessWidget {
               ),
             )
             .toList());
+  }
+
+  Widget _buildPickerScrollingList(BuildContext context) {
+    return Expanded(
+      // scrolls when long
+      child: ListView.separated(
+        shrinkWrap: true, // let it size itself if used in a Column
+        physics: const BouncingScrollPhysics(),
+        itemCount: data.length,
+        separatorBuilder: (_, __) =>
+            SizedBox(height: context.vSpace), // space between items
+        itemBuilder: (context, index) {
+          final e = data[index];
+          return GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: () {
+              Get.back();
+              onSelect(index, e);
+            },
+            child: Row(
+              children: [
+                CustomText(text: e.name ?? ''),
+                const Spacer(),
+                RadioButton(isSelected: e.isSelected),
+              ],
+            ),
+          );
+        },
+      ),
+    );
   }
 }
 
