@@ -13,9 +13,13 @@ enum WidgetStatus {
 class WidgetsAnimator extends StatelessWidget {
   final WidgetStatus status;
   final Widget widget;
+  final Widget? emptyWidget;
 
   const WidgetsAnimator(
-      {super.key, required this.status, required this.widget});
+      {super.key,
+      required this.status,
+      required this.widget,
+      this.emptyWidget});
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +31,12 @@ class WidgetsAnimator extends StatelessWidget {
           case WidgetStatus.isLoading:
             return const Loader();
           case WidgetStatus.isEmpty:
-            return Center(
-                child: Image.asset(
-              "assets/images/nodata.png",
-              width: context.maxWidthNeeded * 0.5,
-            ));
+            return emptyWidget ??
+                Center(
+                    child: Image.asset(
+                  "assets/images/nodata.png",
+                  width: context.maxWidthNeeded * 0.5,
+                ));
           case WidgetStatus.isOk:
             return widget;
         }
