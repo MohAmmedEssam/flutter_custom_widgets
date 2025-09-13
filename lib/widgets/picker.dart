@@ -24,30 +24,35 @@ class CustomPicker extends StatelessWidget {
   }
 
   Widget _buildPicker(BuildContext context) {
-    return ShadowContainer(
-      color: context.colorScheme.background,
-      borderRadius:
-          BorderRadius.vertical(top: Radius.circular(context.hSpace * 2)),
-      child: Padding(
-        padding: context.fullPadding,
-        child: Column(children: [
-          if (title != null && title != '')
-            Column(children: [
-              CustomText(
+    return SafeArea(
+      bottom: false, // <- don't shrink height because of safe area bottom
+      child: ShadowContainer(
+        color: context.colorScheme.background,
+        borderRadius:
+            BorderRadius.vertical(top: Radius.circular(context.hSpace * 2)),
+        child: Padding(
+          padding: context.fullPadding,
+          child: Column(
+            children: [
+              if (title != null && title!.isNotEmpty) ...[
+                CustomText(
                   text: title ?? '',
                   fontSize: HeaderStyle.h1,
-                  alignment: Alignment.center),
-              SizedBox(height: context.vSpace),
-            ]),
-          (data.length > 7)
-              ? SizedBox(
-                  height: context.fullHeight * 0.5, // or any height you want
-                  child: Scroller(
-                    child: _buildPickerList(context),
-                  ),
-                )
-              : _buildPickerList(context)
-        ]),
+                  alignment: Alignment.center,
+                ),
+                SizedBox(height: context.vSpace),
+              ],
+              (data.length > 7)
+                  ? SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.5,
+                      child: Scroller(
+                        child: _buildPickerList(context),
+                      ),
+                    )
+                  : _buildPickerList(context),
+            ],
+          ),
+        ),
       ),
     );
   }
