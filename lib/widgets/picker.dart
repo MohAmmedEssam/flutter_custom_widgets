@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'c_text.dart';
-import 'scroller.dart';
 import 'c_shadow.dart';
 import 'one_row_column.dart';
 import '../model/idname.dart';
@@ -25,7 +24,7 @@ class CustomPicker extends StatelessWidget {
 
   Widget _buildPicker(BuildContext context) {
     return ShadowContainer(
-      color: context.colorScheme.background,
+      color: context.colorScheme.surface,
       borderRadius:
           BorderRadius.vertical(top: Radius.circular(context.hSpace * 2)),
       child: Padding(
@@ -114,7 +113,7 @@ class RadioButton extends StatelessWidget {
       color: context.primaryColor,
       child: RoundedContainer(
         size: context.vSpace * 1,
-        color: context.colorScheme.background,
+        color: context.colorScheme.surface,
         child: isSelected
             ? RoundedContainer(
                 size: context.vSpace * 0.75,

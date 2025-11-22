@@ -27,12 +27,12 @@ class StepIndicator extends StatelessWidget {
             children: [
               for (var step in steps)
                 Container(
-                  color: context.colorScheme.background,
+                  color: context.colorScheme.surface,
                   width: (context.width / (steps.length * 3)),
                   height: (context.width / (steps.length * 3)),
                   child: ShadowContainer(
                     color: context.primaryColor
-                        .withOpacity(step <= completedStep ? 1 : 0.3),
+                        .withAlpha(step <= completedStep ? 250 : 20),
                     radius: context.fullHeight / 2,
                     child: CustomText(
                       text: '$step',

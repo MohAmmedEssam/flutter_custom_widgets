@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'c_text_field.dart';
 
-class CustomSearchBar extends StatefulWidget {
+class CustomSearchBar extends StatelessWidget {
   final String hint;
   final Function(String?) onSave;
   final Function(String?)? onChanged;
@@ -21,46 +21,15 @@ class CustomSearchBar extends StatefulWidget {
   });
 
   @override
-  CustomSearchBarState createState() => CustomSearchBarState();
-}
-
-class CustomSearchBarState extends State<CustomSearchBar> {
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final FocusNode _focusNode = FocusNode();
-
-  @override
-  void initState() {
-    super.initState();
-    if (widget.autoFocus) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        _focusNode.requestFocus();
-      });
-    }
-  }
-
-  @override
-  void dispose() {
-    _focusNode.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Form(
-      key: formKey,
-      child: CustomTextField(
-          hint: widget.hint,
-          focusNode: _focusNode, // 👈 pass focus node
-          onChanged: widget.onChanged,
-          onFieldSubmitted: widget.onFieldSubmitted,
-          prefixIcon: widget.prefixIcon,
-          suffixIcon: widget.suffixIcon,
-          onEditingComplete: () {
-            formKey.currentState?.save();
-          },
-          onSave: (value) {
-            widget.onSave(value);
-          }),
-    );
+    return CustomTextField(
+        hint: hint,
+        onChanged: onChanged,
+        onFieldSubmitted: onFieldSubmitted,
+        prefixIcon: prefixIcon,
+        suffixIcon: suffixIcon,
+        onSave: (value) {
+          onSave(value);
+        });
   }
 }

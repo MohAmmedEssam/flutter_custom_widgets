@@ -20,6 +20,10 @@ export 'widgets/scroller.dart';
 export 'widgets/snackbar.dart';
 export 'widgets/step_indicator.dart';
 export 'widgets/widgets_animator.dart';
+export 'widgets/otp.dart';
+export 'widgets/gradient_background.dart';
+export 'widgets/glass_container.dart';
+export 'widgets/base_container.dart';
 
 export 'model/idname.dart';
 export 'ext/context_extension.dart';
