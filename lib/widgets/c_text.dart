@@ -12,7 +12,9 @@ class CustomText extends StatelessWidget {
   final int? maxLines;
   final TextStyle? style;
   final TextDecoration? decoration;
-
+  final FontWeight? fontWeight;
+  final double? fontDoubleSize;
+  final TextOverflow? overflow;
   const CustomText({
     super.key,
     this.text = '',
@@ -24,12 +26,19 @@ class CustomText extends StatelessWidget {
     this.maxLines,
     this.style,
     this.decoration,
+    this.fontWeight,
+    this.fontDoubleSize,
+    this.overflow,
   });
 
   @override
   Widget build(BuildContext context) {
     // Base style from HeaderStyle
-    var baseStyle = context.font(fontSize).copyWith(color: color);
+    var baseStyle = context.font(fontSize).copyWith(
+          color: color,
+          fontWeight: fontWeight,
+          fontSize: fontDoubleSize,
+        );
     if (decoration != null) {
       baseStyle = baseStyle.copyWith(decoration: decoration);
     }
@@ -41,6 +50,7 @@ class CustomText extends StatelessWidget {
           style: style ?? baseStyle,
           textAlign: textAlign,
           maxLines: maxLines,
+          overflow: overflow,
         ));
   }
 }

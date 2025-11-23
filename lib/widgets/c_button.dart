@@ -10,6 +10,9 @@ class CustomButton extends StatelessWidget {
   final CustomButtonStyle style;
   final VoidCallback? onPressed;
   final String? customValue;
+  final FontWeight? fontWeight;
+  final HeaderStyle fontSize;
+  final double? fontDoubleSize;
 
   const CustomButton({
     super.key,
@@ -17,6 +20,9 @@ class CustomButton extends StatelessWidget {
     required this.onPressed,
     this.customValue,
     this.style = CustomButtonStyle.main,
+    this.fontWeight,
+    this.fontSize = HeaderStyle.h3,
+    this.fontDoubleSize,
   });
 
   @override
@@ -32,7 +38,8 @@ class CustomButton extends StatelessWidget {
           child: CustomText(
               text: text,
               customValue: customValue,
-              fontSize: HeaderStyle.h3,
+              fontSize: fontSize,
+              fontWeight: fontWeight,
               color: Colors.white,
               alignment: Alignment.center),
         ),
@@ -48,7 +55,9 @@ class CustomButton extends StatelessWidget {
           child: CustomText(
               text: text,
               customValue: customValue,
-              fontSize: HeaderStyle.h3,
+              fontSize: fontSize,
+              fontWeight: fontWeight,
+              fontDoubleSize: fontDoubleSize,
               color: context.primaryColor,
               alignment: Alignment.center),
         ),
