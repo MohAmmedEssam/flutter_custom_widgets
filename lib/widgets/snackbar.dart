@@ -46,7 +46,7 @@ class CustomSnackBar {
     Get.rawSnackbar(
       title: title,
       duration: snakbarDuration,
-      snackStyle: SnackStyle.GROUNDED,
+      snackStyle: SnackStyle.FLOATING,
       backgroundColor: color ?? Colors.green,
       onTap: (snack) {
         Get.closeAllSnackbars();
@@ -64,7 +64,7 @@ class CustomSnackBar {
     Get.rawSnackbar(
       title: title,
       duration: snakbarDuration,
-      snackStyle: SnackStyle.GROUNDED,
+      snackStyle: SnackStyle.FLOATING,
       backgroundColor: color ?? Colors.redAccent,
       onTap: (snack) {
         Get.closeAllSnackbars();
