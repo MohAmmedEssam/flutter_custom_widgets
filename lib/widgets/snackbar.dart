@@ -9,6 +9,8 @@ class CustomSnackBar {
       title,
       message,
       duration: snakbarDuration,
+      snackStyle: SnackStyle.FLOATING,
+      snackPosition: SnackPosition.TOP,
       margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
       colorText: Colors.white,
       backgroundColor: Colors.green,
@@ -28,6 +30,8 @@ class CustomSnackBar {
       title,
       message,
       duration: snakbarDuration,
+      snackStyle: SnackStyle.FLOATING,
+      snackPosition: SnackPosition.TOP,
       margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
       colorText: Colors.white,
       backgroundColor: color ?? Colors.redAccent,
@@ -47,6 +51,7 @@ class CustomSnackBar {
       title: title,
       duration: snakbarDuration,
       snackStyle: SnackStyle.FLOATING,
+      snackPosition: SnackPosition.TOP,
       backgroundColor: color ?? Colors.green,
       onTap: (snack) {
         Get.closeAllSnackbars();
@@ -65,6 +70,7 @@ class CustomSnackBar {
       title: title,
       duration: snakbarDuration,
       snackStyle: SnackStyle.FLOATING,
+      snackPosition: SnackPosition.TOP,
       backgroundColor: color ?? Colors.redAccent,
       onTap: (snack) {
         Get.closeAllSnackbars();
