@@ -11,9 +11,15 @@ class CustomPicker extends StatelessWidget {
   final String? title;
   final List<IdName> data;
   final Function(int, IdName) onSelect;
+  final bool isRadioButtonLeading;
 
-  const CustomPicker(
-      {super.key, this.title, required this.data, required this.onSelect});
+  const CustomPicker({
+    super.key,
+    this.title,
+    required this.data,
+    required this.onSelect,
+    this.isRadioButtonLeading = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -59,11 +65,18 @@ class CustomPicker extends StatelessWidget {
                   Get.back();
                   onSelect(e.key, e.value);
                 },
-                child: Row(children: [
-                  CustomText(text: e.value.name ?? ''),
-                  const Spacer(),
-                  RadioButton(isSelected: e.value.isSelected)
-                ]),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      if (isRadioButtonLeading)
+                        RadioButton(isSelected: e.value.isSelected),
+                      if (isRadioButtonLeading) SizedBox(width: context.hSpace),
+                      Expanded(
+                        child: CustomText(text: e.value.name ?? ''),
+                      ),
+                      if (!isRadioButtonLeading)
+                        RadioButton(isSelected: e.value.isSelected)
+                    ]),
               ),
             )
             .toList());
@@ -87,10 +100,14 @@ class CustomPicker extends StatelessWidget {
               onSelect(index, e);
             },
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CustomText(text: e.name ?? ''),
-                const Spacer(),
-                RadioButton(isSelected: e.isSelected),
+                if (isRadioButtonLeading) RadioButton(isSelected: e.isSelected),
+                if (isRadioButtonLeading) SizedBox(width: context.hSpace),
+                Expanded(
+                  child: CustomText(text: e.name ?? ''),
+                ),
+                if (!isRadioButtonLeading) RadioButton(isSelected: e.isSelected)
               ],
             ),
           );

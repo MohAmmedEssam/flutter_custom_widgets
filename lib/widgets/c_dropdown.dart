@@ -9,19 +9,23 @@ import '../ext/context_extension.dart';
 class CustomDropdownButton extends StatelessWidget {
   final String hint;
   final String? initialValue;
+  final String? pickerTitle;
   final Widget? trailingWidget;
   final List<IdName> options;
   final FormFieldValidator<String>? validator;
   final void Function(int, IdName) onChanged;
+  final bool isRadioButtonLeading;
 
   const CustomDropdownButton({
     super.key,
     required this.hint,
     required this.options,
     required this.onChanged,
+    this.pickerTitle,
     this.trailingWidget,
     this.initialValue,
     this.validator,
+    this.isRadioButtonLeading = true,
   });
 
   @override
@@ -36,7 +40,8 @@ class CustomDropdownButton extends StatelessWidget {
           onTap: () {
             Get.bottomSheet(
               CustomPicker(
-                title: hint,
+                title: pickerTitle ?? hint,
+                isRadioButtonLeading: isRadioButtonLeading,
                 data: options,
                 onSelect: (index, model) async {
                   onChanged(index, model);
