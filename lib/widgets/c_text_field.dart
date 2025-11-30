@@ -13,7 +13,8 @@ class CustomTextField extends StatefulWidget {
   final String? initialValue;
   final Icon? prefixIcon, suffixIcon;
   final TextInputType? keyboardType;
-  final AutovalidateMode? autovalidateMode; // 👈 add this
+  final AutovalidateMode? autovalidateMode;
+  final int? maxLines, minLines;
 
   const CustomTextField({
     super.key,
@@ -28,7 +29,9 @@ class CustomTextField extends StatefulWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.keyboardType,
-    this.autovalidateMode, // 👈 add this
+    this.autovalidateMode,
+    this.minLines,
+    this.maxLines,
   });
 
   @override
@@ -47,6 +50,8 @@ class CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      minLines: widget.minLines,
+      maxLines: widget.maxLines,
       initialValue: widget.initialValue,
       keyboardType: widget.keyboardType,
       onSaved: widget.onSave,
