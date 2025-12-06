@@ -30,8 +30,8 @@ class CustomTextField extends StatefulWidget {
     this.suffixIcon,
     this.keyboardType,
     this.autovalidateMode,
-    this.minLines,
-    this.maxLines,
+    this.minLines = 1,
+    this.maxLines = 1,
   });
 
   @override
