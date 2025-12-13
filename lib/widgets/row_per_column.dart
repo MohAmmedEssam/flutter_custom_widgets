@@ -20,22 +20,22 @@ class RowsPerColumn extends StatelessWidget {
           final startIndex = index * numPerRow;
           final cells = children.sublist(
             startIndex,
-            startIndex + numPerRow < children.length
-                ? startIndex + numPerRow
-                : children.length,
+            (startIndex + numPerRow).clamp(0, children.length),
           );
 
-          return Column(children: [
-            Row(
-              children: cells.map((cell) {
-                return Expanded(
-                  child: Container(padding: context.sfullPadding, child: cell),
-                );
-              }).toList(),
-            ),
-          ]);
+          return Row(
+            crossAxisAlignment: CrossAxisAlignment.start, // ✅ TOP ALIGN
+            children: cells.map((cell) {
+              return Expanded(
+                child: Padding(
+                  padding: context.sfullPadding,
+                  child: cell,
+                ),
+              );
+            }).toList(),
+          );
         },
-      ).toList(),
+      ),
     );
   }
 }

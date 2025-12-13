@@ -5,7 +5,7 @@ import 'c_text_field.dart';
 class CustomSearchBar extends StatefulWidget {
   final String hint;
   final Function(String)? onChanged;
-  final Icon? prefixIcon, suffixIcon;
+  final Widget? prefixIcon, suffixIcon;
 
   const CustomSearchBar({
     super.key,

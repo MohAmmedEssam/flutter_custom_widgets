@@ -11,7 +11,7 @@ class CustomTextField extends StatefulWidget {
   final String? Function(String?)? validator;
   final VoidCallback? onEditingComplete;
   final String? initialValue;
-  final Icon? prefixIcon, suffixIcon;
+  final Widget? prefixIcon, suffixIcon;
   final TextInputType? keyboardType;
   final AutovalidateMode? autovalidateMode;
   final int? maxLines, minLines;
