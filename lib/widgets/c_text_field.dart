@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import '../ext/context_extension.dart';
 
@@ -15,6 +16,7 @@ class CustomTextField extends StatefulWidget {
   final TextInputType? keyboardType;
   final AutovalidateMode? autovalidateMode;
   final int? maxLines, minLines;
+  final List<TextInputFormatter>? inputFormatters;
 
   const CustomTextField({
     super.key,
@@ -32,6 +34,7 @@ class CustomTextField extends StatefulWidget {
     this.autovalidateMode,
     this.minLines = 1,
     this.maxLines = 1,
+    this.inputFormatters,
   });
 
   @override
@@ -52,6 +55,7 @@ class CustomTextFieldState extends State<CustomTextField> {
     return TextFormField(
       minLines: widget.minLines,
       maxLines: widget.maxLines,
+      inputFormatters: widget.inputFormatters,
       initialValue: widget.initialValue,
       keyboardType: widget.keyboardType,
       onSaved: widget.onSave,

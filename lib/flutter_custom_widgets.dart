@@ -27,6 +27,7 @@ export 'widgets/base_container.dart';
 
 export 'model/idname.dart';
 export 'ext/context_extension.dart';
+export 'ext/strings.dart';
 export 'manage/localize.dart';
 export 'manage/styles.dart';
 export 'manage/theme.dart';
