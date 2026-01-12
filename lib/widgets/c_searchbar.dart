@@ -4,15 +4,18 @@ import 'c_text_field.dart';
 
 class CustomSearchBar extends StatefulWidget {
   final String hint;
+  final String? initialValue;
   final Function(String)? onChanged;
   final Widget? prefixIcon, suffixIcon;
-
+  final int? maxLines;
   const CustomSearchBar({
     super.key,
     required this.hint,
+    this.initialValue,
     this.onChanged,
     this.prefixIcon,
     this.suffixIcon,
+    this.maxLines = 1,
   });
 
   @override
@@ -44,9 +47,11 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
   Widget build(BuildContext context) {
     return CustomTextField(
       hint: widget.hint,
+      initialValue: widget.initialValue,
       onChanged: _onTextChanged,
       prefixIcon: widget.prefixIcon,
       suffixIcon: widget.suffixIcon,
+      maxLines: widget.maxLines ?? 1,
       onSave: (String? p1) {
         FocusScope.of(context).unfocus();
         widget.onChanged!(p1 ?? '');
